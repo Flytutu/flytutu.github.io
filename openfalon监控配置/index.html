@@ -18,7 +18,7 @@ Open-falcon是小米运维团队从互联网公司的需求出发，根据多年
 <meta property="og:description" content="最进在看《docker 容器与容器云 第2版》，但是对于运维的一些知识还是不够了解，在同学的推荐下，尝试配置openfalon监控，监控自己写的软件，为以后需要开发的项目积累一点经验。
 
 Open-falcon是小米运维团队从互联网公司的需求出发，根据多年的运维经验，结合SRE、SA、DEVS的使用经验和反馈，开发的一套面向互联网的企业级开源监控产品。">
-<meta property="og:updated_time" content="2017-06-04T02:48:46.000Z">
+<meta property="og:updated_time" content="2017-06-04T02:59:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openfalon监控配置">
 <meta name="twitter:description" content="最进在看《docker 容器与容器云 第2版》，但是对于运维的一些知识还是不够了解，在同学的推荐下，尝试配置openfalon监控，监控自己写的软件，为以后需要开发的项目积累一点经验。
@@ -202,13 +202,15 @@ Open-falcon是小米运维团队从互联网公司的需求出发，根据多年
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">make all</div><div class="line">make agent</div><div class="line">make pack</div></pre></td></tr></table></figure>
 <p>解包和建立文件目录</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">export WorkDir=&quot;$HOME/open-falcon&quot;</div><div class="line">mkdir -p $WorkDir</div><div class="line">tar -xzvf open-falcon-vx.x.x.tar.gz -C $WorkDir</div><div class="line">cd $WorkDir</div></pre></td></tr></table></figure>
+<p>数据库连接的配置格式是: <code>username:password@tcp(path:port)/xxxx</code></p>
 <h2 id="安装web监控端dashboard"><a href="#安装web监控端dashboard" class="headerlink" title="安装web监控端dashboard"></a>安装web监控端<strong>dashboard</strong></h2><p>下载dashboard源码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export WorkDir=&quot;$HOME/open-falcon&quot;</div><div class="line">cd $WorkDir</div><div class="line">git clone https://github.com/open-falcon/dashboard.git</div></pre></td></tr></table></figure>
 <p>下载安装依赖</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">sudo su</div><div class="line">apt-get install -y python-virtualenv</div><div class="line">apt-get install -y slapd ldap-utils</div><div class="line">apt-get install -y libmysqld-dev</div><div class="line">apt-get install -y build-essential</div><div class="line">apt-get install -y python-dev libldap2-dev libsasl2-dev libssl-dev</div><div class="line"></div><div class="line">cd dashboard</div><div class="line">sudo virtualenv ./env</div><div class="line">./env/bin/pip install -r pip_requirements.txt -i https://pypi.douban.com/simple</div></pre></td></tr></table></figure>
 <p>修改配置，dashboard的配置文件为config.py</p>
-<p>数据库连接的配置格式是: <code>username:password@tcp(path:port)/xxxx</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#添加数据库密码，默认为空</span></div><div class="line">PORTAL_DB_PASS = os.environ.get(<span class="string">"PORTAL_DB_PASS"</span>,<span class="string">"123456"</span>)</div><div class="line">ALARM_DB_PASS = os.environ.get(<span class="string">"ALARM_DB_PASS"</span>,<span class="string">"123456"</span>)</div></pre></td></tr></table></figure>
+<p>启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./control start</div></pre></td></tr></table></figure>
 
       
 
