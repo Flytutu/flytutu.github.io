@@ -103,7 +103,7 @@ switch-case是一种多种选择的语法，其本质与if-else方法差不多�
 <meta property="og:description" content="近期在公司实习，参与了公司的一个分布式的应用服务系统。系统采用Golang语言作为系统的开发语言，在开发过程中采用了Go语言的反射函数的特性来取代了以前常使用的switch语法。
 
 switch-case是一种多种选择的语法，其本质与if-else方法差不多，都是通过判断条件来执行不同的方法。而Go提供了一种机制在运行时更新变量和检查它们的值，调用它们的方法，和它们支持的内在操作，但是在编译时并不">
-<meta property="og:updated_time" content="2017-08-05T06:28:12.000Z">
+<meta property="og:updated_time" content="2017-08-05T06:56:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="go语言中使用反射函数代替switch语法">
 <meta name="twitter:description" content="近期在公司实习，参与了公司的一个分布式的应用服务系统。系统采用Golang语言作为系统的开发语言，在开发过程中采用了Go语言的反射函数的特性来取代了以前常使用的switch语法。
@@ -363,7 +363,7 @@ switch-case是一种多种选择的语法，其本质与if-else方法差不多�
 <p>问题：</p>
 <p>在一个URL的路由中，我们在request中通过cmd的参数来对应一个方法，这样我们要如何根据一个cmd对应一个方法？</p>
 <a id="more"></a>
-<p>可能针对这个问题有人会说，我们为什么不把cmd放到URL里面，这样的话就是一个方法对应一个路由，而且大多数的Web框架会通过回调函数来进行函数调用，针对于这个问题，我只能说大部分的云厂商是将cmd放到http的request里面的，具体的好处可能就是减少了对API的监管吧。</p>
+<p>可能针对这个问题有人会说，我们为什么不把cmd放到URL里面，这样的话就是一个方法对应一个路由，而且大多数的Web框架会通过回调函数来进行函数调用，针对于这个问题，我只能说大部分的都是将cmd放到http的request里面的，具体的好处可能就是减少了对API的监管，以及当路由比较多的时间能够减少麻烦吧。</p>
 <p>用switch方法实现：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">cmd := this.GetString(<span class="string">"cmd"</span>)</div><div class="line"><span class="keyword">switch</span> cmd&#123;</div><div class="line">  <span class="keyword">case</span> <span class="string">"ls"</span>:</div><div class="line">  	ls()</div><div class="line">  <span class="keyword">case</span> <span class="string">"cd"</span>:</div><div class="line">  	cd()</div><div class="line">  <span class="keyword">default</span>:</div><div class="line">  	fmt.Println(<span class="string">"cmd method missing"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上述的方法先通过URL的参数获取到cmd，然后通过cmd来调用相对应的方法。在传统的MVC的设计模式中，需要在Controller中添加switch方法，同时需要在Model中实现相对应的方法，总计修改了2个文件。</p>
