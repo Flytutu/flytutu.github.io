@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="code," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="近期在公司实习，参与了公司的一个分布式的应用服务系统。系统采用Golang语言作为系统的开发语言，在开发过程中采用了Go语言的反射函数的特性来取代了以前常使用的switch语法。
+
+switch-case是一种多种选择的语法，其本质与if-else方法差不多，都是通过判断条件来执行不同的方法。而Go提供了一种机制在运行时更新变量和检查它们的值，调用它们的方法，和它们支持的内在操作，但是在编译时并不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go语言中使用反射函数代替switch语法">
+<meta property="og:url" content="http://yoursite.com/go语言中使用反射函数代替switch语法/index.html">
+<meta property="og:site_name" content="Flytutu的博客">
+<meta property="og:description" content="近期在公司实习，参与了公司的一个分布式的应用服务系统。系统采用Golang语言作为系统的开发语言，在开发过程中采用了Go语言的反射函数的特性来取代了以前常使用的switch语法。
+
+switch-case是一种多种选择的语法，其本质与if-else方法差不多，都是通过判断条件来执行不同的方法。而Go提供了一种机制在运行时更新变量和检查它们的值，调用它们的方法，和它们支持的内在操作，但是在编译时并不">
+<meta property="og:updated_time" content="2017-08-05T06:28:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="go语言中使用反射函数代替switch语法">
+<meta name="twitter:description" content="近期在公司实习，参与了公司的一个分布式的应用服务系统。系统采用Golang语言作为系统的开发语言，在开发过程中采用了Go语言的反射函数的特性来取代了以前常使用的switch语法。
+
+switch-case是一种多种选择的语法，其本质与if-else方法差不多，都是通过判断条件来执行不同的方法。而Go提供了一种机制在运行时更新变量和检查它们的值，调用它们的方法，和它们支持的内在操作，但是在编译时并不">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/go语言中使用反射函数代替switch语法/"/>
+
+
+
+
+
+  <title>go语言中使用反射函数代替switch语法 | Flytutu的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Flytutu的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">能拥有一双翅膀，去摘颗星星给你</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-开发">
+          <a href="/tags/code/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+            
+            开发
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-运维">
+          <a href="/tags/运维/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-兴趣">
+          <a href="/tags/兴趣/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            兴趣
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-闲谈">
+          <a href="/tags/闲谈/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-coffee"></i> <br />
+            
+            闲谈
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go语言中使用反射函数代替switch语法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flytutu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Flytutu的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">go语言中使用反射函数代替switch语法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-30T11:49:45+08:00">
+                2017-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>近期在公司实习，参与了公司的一个分布式的应用服务系统。系统采用Golang语言作为系统的开发语言，在开发过程中采用了Go语言的反射函数的特性来取代了以前常使用的switch语法。</p>
+<blockquote>
+<p>switch-case是一种多种选择的语法，其本质与if-else方法差不多，都是通过判断条件来执行不同的方法。而Go提供了一种机制在运行时更新变量和检查它们的值，调用它们的方法，和它们支持的内在操作，但是在编译时并不知道这些变量的类型。这种机制被称为反射，反射也可以让我们将类型本身作为第一类的值类型处理。</p>
+</blockquote>
+<h1 id="Web应用路由问题"><a href="#Web应用路由问题" class="headerlink" title="Web应用路由问题"></a>Web应用路由问题</h1><p>在我们编写Web应用过程中，常常会遇到一个路由需要对应一个方法，我们会选择使用switch的方法来进行路由的匹配，若是路由匹配成功，我们会调用一个方法，这种方法能够很简便的完成我们的工作，也便于程序员在编写代码过程中厘清思路。</p>
+<p>问题：</p>
+<p>在一个URL的路由中，我们在request中通过cmd的参数来对应一个方法，这样我们要如何根据一个cmd对应一个方法？</p>
+<a id="more"></a>
+<p>可能针对这个问题有人会说，我们为什么不把cmd放到URL里面，这样的话就是一个方法对应一个路由，而且大多数的Web框架会通过回调函数来进行函数调用，针对于这个问题，我只能说大部分的云厂商是将cmd放到http的request里面的，具体的好处可能就是减少了对API的监管吧。</p>
+<p>用switch方法实现：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">cmd := this.GetString(<span class="string">"cmd"</span>)</div><div class="line"><span class="keyword">switch</span> cmd&#123;</div><div class="line">  <span class="keyword">case</span> <span class="string">"ls"</span>:</div><div class="line">  	ls()</div><div class="line">  <span class="keyword">case</span> <span class="string">"cd"</span>:</div><div class="line">  	cd()</div><div class="line">  <span class="keyword">default</span>:</div><div class="line">  	fmt.Println(<span class="string">"cmd method missing"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上述的方法先通过URL的参数获取到cmd，然后通过cmd来调用相对应的方法。在传统的MVC的设计模式中，需要在Controller中添加switch方法，同时需要在Model中实现相对应的方法，总计修改了2个文件。</p>
+<h1 id="go语言反射函数"><a href="#go语言反射函数" class="headerlink" title="go语言反射函数"></a>go语言反射函数</h1><h2 id="reflect包"><a href="#reflect包" class="headerlink" title="reflect包"></a>reflect包</h2><p>在reflect包中，主要通过Typeof()和Valueof()两个方法来实现反射。两个方法相互结合，能够反射出被反射函数的全部信息。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"reflect"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="keyword">type</span> Ref <span class="keyword">struct</span> &#123;   </div><div class="line">	id <span class="keyword">int</span> </div><div class="line">	name <span class="keyword">string</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(ref *Ref)</span><span class="title">GetName</span><span class="params">()</span></span>&#123;	</div><div class="line">	fmt.Println(<span class="string">"getName()函数"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(ref *Ref)</span><span class="title">GetNameById</span><span class="params">()</span></span>&#123;</div><div class="line">	fmt.Println(<span class="string">"getNameById()函数"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	t := reflect.TypeOf(&amp;Ref&#123;&#125;)</div><div class="line">	v := reflect.ValueOf(<span class="built_in">new</span>(Ref))</div><div class="line">	fmt.Println(t)</div><div class="line">	fmt.Println(v)</div><div class="line">	<span class="keyword">for</span> i:= <span class="number">0</span>; i&lt; t.NumMethod();i++&#123;</div><div class="line">		fmt.Println(t.Method(i).Name)</div><div class="line">		v.Method(i).Call(<span class="literal">nil</span>)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="TypeOf"><a href="#TypeOf" class="headerlink" title="TypeOf()"></a>TypeOf()</h3><p>TypeOf()函数主要是打印出被反射函数的类型，其返回结果是reflect.Type类型。</p>
+<p>在上面的示例中，通过Method().Name能够反射其方法的函数名。</p>
+<p>常用的方法：</p>
+<ul>
+<li>func (t *rtype)String() string</li>
+<li>func (t *rtype)Name() string</li>
+<li>func (t *rtype)Kind() reflect.kind</li>
+<li>func (t *rtype)Method(int) reflect.Method</li>
+<li>func (t *rtype)Elem() reflect.Type</li>
+<li>func (t *rtype)In(int) reflect.Type</li>
+</ul>
+<h3 id="ValueOf"><a href="#ValueOf" class="headerlink" title="ValueOf()"></a>ValueOf()</h3><p>ValueOf()函数主要是打印出被反射函数的类型，其返回结果是reflect.Value类型。</p>
+<p>在上面的示例中，通过Method().Call()能够反射出其函数并执行。</p>
+<p>常用的方法：</p>
+<ul>
+<li>func (v Value)String() string</li>
+<li>func (v Value)Elem() reflect.Value</li>
+<li>func (v Value)Method(int) reflect.Value</li>
+<li>func (v Value)Call(in []Value) (r []Value)</li>
+</ul>
+<h2 id="反射的实现过程"><a href="#反射的实现过程" class="headerlink" title="反射的实现过程"></a>反射的实现过程</h2><p>由于有反射的存在，因此在传统的MVC的设计模式中，当我们添加服务时，不需要修改Controller端的代码，Controller只需要维持一个map的表，里面的就来存储需要被反射的models。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> server </div><div class="line"><span class="keyword">import</span>(</div><div class="line">  <span class="string">"reflect"</span></div><div class="line">  <span class="string">"fmt"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment">// ReServer 来保存map的结构体</span></div><div class="line"><span class="keyword">type</span> ReServer <span class="keyword">struct</span> &#123;</div><div class="line">  m <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// RegisterService 注册服务</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *ReServer)</span><span class="title">RegisterService</span><span class="params">(service <span class="keyword">interface</span>&#123;&#125;)</span><span class="params">(err error)</span></span>&#123;</div><div class="line">  serviceType := reflect.TypeOf(service).Elem()</div><div class="line">  ServiceName := serviceType.Name()</div><div class="line">  <span class="keyword">if</span> _,ok := this.m[ServiceName]</div><div class="line">  <span class="keyword">if</span> ok &#123;</div><div class="line">    fmt.Println(<span class="string">"service has been registered"</span>)</div><div class="line">  &#125;<span class="keyword">else</span>&#123;</div><div class="line">    this.m[ServiceName] = service</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 	Start 服务启动</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *ReServer)</span><span class="title">Start</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">for</span> k,v := <span class="keyword">range</span> this.m &#123;</div><div class="line">    <span class="comment">// 里面根据业务逻辑执行想要的方法</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在上诉的例子中，通过对services的服务注册，就能够通过Start()函数发现服务，并且根据业务来实现自己的代码。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">  <span class="string">"server"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="keyword">type</span> Server <span class="keyword">struct</span> &#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(server *Server)</span><span class="title">funOne</span><span class="params">()</span></span>&#123;</div><div class="line">  fmt.Println(<span class="string">"Server FunOne"</span>)</div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  reServer := &amp;server.ReServer&#123;</div><div class="line">    m: <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)</div><div class="line">  &#125;</div><div class="line">  err := reServer.RegisterService(<span class="built_in">new</span>(Server))</div><div class="line">  reServer.Start()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>因此在我们主函数中，导入封装好的包，只需要注册一个结构体，就能够将自己的方法反射出来实现。</p>
+<p>对应上面的Web的路由问题，我们将Controller进行封装，然后将Model进行反射，当我们业务增加时，我们在Model里面添加就可以了，不需要修改Controller。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/code/" rel="tag"># code</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/openfalon监控配置/" rel="next" title="openfalon监控配置">
+                <i class="fa fa-chevron-left"></i> openfalon监控配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/image/touxiang.jpg"
+               alt="flytutu" />
+          <p class="site-author-name" itemprop="name">flytutu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Web应用路由问题"><span class="nav-number">1.</span> <span class="nav-text">Web应用路由问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#go语言反射函数"><span class="nav-number">2.</span> <span class="nav-text">go语言反射函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#reflect包"><span class="nav-number">2.1.</span> <span class="nav-text">reflect包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TypeOf"><span class="nav-number">2.1.1.</span> <span class="nav-text">TypeOf()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ValueOf"><span class="nav-number">2.1.2.</span> <span class="nav-text">ValueOf()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射的实现过程"><span class="nav-number">2.2.</span> <span class="nav-text">反射的实现过程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">flytutu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
