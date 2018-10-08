@@ -101,33 +101,26 @@ var _hmt = _hmt || [];
 
 
 
-<meta name="description" content="​    最近和同学一起准备写一个王者荣耀的挂机程序，因此写一个文档把实验过程和实验过程中遇到的问题进行记录。
-​    目前选择的是安卓微信平台，通过微信扫码登陆。
-虚拟机的选择​    在腾讯的王者荣耀的官方网站上有推荐的虚拟机，在尝试了不同的虚拟机后选择了逍遥游模拟器，优点：可以模拟按键、能够多开程序。
-虚拟机端口查找​    在选择好了虚拟机后，要尝试用adb连接到开的程序，但是现在是不知">
+<meta name="description" content="​    最近和同学一起准备写一个王者荣耀的挂机程序，因此写一个文档把实验过程和实验过程中遇到的问题进行记录。 ​    目前选择的是安卓微信平台，通过微信扫码登陆。 虚拟机的选择​    在腾讯的王者荣耀的官方网站上有推荐的虚拟机，在尝试了不同的虚拟机后选择了逍遥游模拟器，优点：可以模拟按键、能够多开程序。 虚拟机端口查找​    在选择好了虚拟机后，要尝试用adb连接到开的程序，但是现在是不知">
+<meta name="keywords" content="兴趣">
 <meta property="og:type" content="article">
 <meta property="og:title" content="王者荣耀挂机脚本初探（1）">
 <meta property="og:url" content="http://yoursite.com/王者荣耀挂机脚本初探（1）/index.html">
 <meta property="og:site_name" content="Flytutu的博客">
-<meta property="og:description" content="​    最近和同学一起准备写一个王者荣耀的挂机程序，因此写一个文档把实验过程和实验过程中遇到的问题进行记录。
-​    目前选择的是安卓微信平台，通过微信扫码登陆。
-虚拟机的选择​    在腾讯的王者荣耀的官方网站上有推荐的虚拟机，在尝试了不同的虚拟机后选择了逍遥游模拟器，优点：可以模拟按键、能够多开程序。
-虚拟机端口查找​    在选择好了虚拟机后，要尝试用adb连接到开的程序，但是现在是不知">
-<meta property="og:image" content="http://yoursite.com/../image/端口1.png">
-<meta property="og:image" content="http://yoursite.com/../image/端口2.png">
-<meta property="og:image" content="http://yoursite.com/../image/端口3.png">
-<meta property="og:image" content="http://yoursite.com/../image/端口4.png">
-<meta property="og:image" content="http://yoursite.com/../image/端口5.png">
-<meta property="og:image" content="http://yoursite.com/../image/端口6.png">
-<meta property="og:image" content="http://yoursite.com/../image/端口7.png">
+<meta property="og:description" content="​    最近和同学一起准备写一个王者荣耀的挂机程序，因此写一个文档把实验过程和实验过程中遇到的问题进行记录。 ​    目前选择的是安卓微信平台，通过微信扫码登陆。 虚拟机的选择​    在腾讯的王者荣耀的官方网站上有推荐的虚拟机，在尝试了不同的虚拟机后选择了逍遥游模拟器，优点：可以模拟按键、能够多开程序。 虚拟机端口查找​    在选择好了虚拟机后，要尝试用adb连接到开的程序，但是现在是不知">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/image/端口1.png">
+<meta property="og:image" content="http://yoursite.com/image/端口2.png">
+<meta property="og:image" content="http://yoursite.com/image/端口3.png">
+<meta property="og:image" content="http://yoursite.com/image/端口4.png">
+<meta property="og:image" content="http://yoursite.com/image/端口5.png">
+<meta property="og:image" content="http://yoursite.com/image/端口6.png">
+<meta property="og:image" content="http://yoursite.com/image/端口7.png">
 <meta property="og:updated_time" content="2017-08-01T07:15:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="王者荣耀挂机脚本初探（1）">
-<meta name="twitter:description" content="​    最近和同学一起准备写一个王者荣耀的挂机程序，因此写一个文档把实验过程和实验过程中遇到的问题进行记录。
-​    目前选择的是安卓微信平台，通过微信扫码登陆。
-虚拟机的选择​    在腾讯的王者荣耀的官方网站上有推荐的虚拟机，在尝试了不同的虚拟机后选择了逍遥游模拟器，优点：可以模拟按键、能够多开程序。
-虚拟机端口查找​    在选择好了虚拟机后，要尝试用adb连接到开的程序，但是现在是不知">
-<meta name="twitter:image" content="http://yoursite.com/../image/端口1.png">
+<meta name="twitter:description" content="​    最近和同学一起准备写一个王者荣耀的挂机程序，因此写一个文档把实验过程和实验过程中遇到的问题进行记录。 ​    目前选择的是安卓微信平台，通过微信扫码登陆。 虚拟机的选择​    在腾讯的王者荣耀的官方网站上有推荐的虚拟机，在尝试了不同的虚拟机后选择了逍遥游模拟器，优点：可以模拟按键、能够多开程序。 虚拟机端口查找​    在选择好了虚拟机后，要尝试用adb连接到开的程序，但是现在是不知">
+<meta name="twitter:image" content="http://yoursite.com/image/端口1.png">
 
 
 
@@ -376,7 +369,7 @@ var _hmt = _hmt || [];
       
         <p>​    最近和同学一起准备写一个<code>王者荣耀</code>的挂机程序，因此写一个文档把实验过程和实验过程中遇到的问题进行记录。</p>
 <p>​    目前选择的是安卓微信平台，通过微信扫码登陆。</p>
-<h2 id="虚拟机的选择"><a href="#虚拟机的选择" class="headerlink" title="虚拟机的选择"></a>虚拟机的选择</h2><p>​    在腾讯的王者荣耀的<a href="http://pvp.qq.com/down/pc/index.shtml" target="_blank" rel="external">官方网站</a>上有推荐的虚拟机，在尝试了不同的虚拟机后选择了逍遥游模拟器，优点：可以模拟按键、能够多开程序。</p>
+<h2 id="虚拟机的选择"><a href="#虚拟机的选择" class="headerlink" title="虚拟机的选择"></a>虚拟机的选择</h2><p>​    在腾讯的王者荣耀的<a href="http://pvp.qq.com/down/pc/index.shtml" target="_blank" rel="noopener">官方网站</a>上有推荐的虚拟机，在尝试了不同的虚拟机后选择了逍遥游模拟器，优点：可以模拟按键、能够多开程序。</p>
 <h2 id="虚拟机端口查找"><a href="#虚拟机端口查找" class="headerlink" title="虚拟机端口查找"></a>虚拟机端口查找</h2><p>​    在选择好了虚拟机后，要尝试用adb连接到开的程序，但是现在是不知道程序运行的端口，因此要查询到程序运行的端口。</p>
 <a id="more"></a>
 <p>​    测试平台选择了windows10，因此在cmd命令行工具中输入命令，使用<code>netstat -0</code>命令扫描全部的端口。</p>
@@ -524,7 +517,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
