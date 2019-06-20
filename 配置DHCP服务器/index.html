@@ -747,7 +747,7 @@ var _hmt = _hmt || [];
           repo: 'flytutu.github.io',
           owner: 'flytutu',
           admin: ['flytutu'],
-          id: location.pathname,
+          id: decodeURI(location.pathname),
           distractionFreeMode: 'true'
         })
         gitalk.render('gitalk-container')           
