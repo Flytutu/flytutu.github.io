@@ -85,7 +85,7 @@ var _hmt = _hmt || [];
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="运维," />
+  <meta name="keywords" content="爬虫," />
 
 
 
@@ -101,27 +101,24 @@ var _hmt = _hmt || [];
 
 
 
-<meta name="description" content="安装dhcp测试环境为Ubuntu15.04系统 安装如下： 1sudo apt-install dhcp3-server">
-<meta name="keywords" content="运维">
+<meta name="description" content="APP相对于一般的网页来说，APP是一个更加封闭的环境，爬虫想要去爬取数据会更加困难。单由于一个APP后面对应的是一个真正的用户，并且用户对手机更加依赖，更多互联网产品会对APP开放更大的权限，能够看到更加详细的信息，这也让得APP爬虫更加重要。 本系列文章主要描述一下如何对APP进行简单的分析，包括接口分析、APP反编译、Xposed注入。">
+<meta name="keywords" content="爬虫">
 <meta property="og:type" content="article">
-<meta property="og:title" content="配置DHCP服务器">
-<meta property="og:url" content="http://yoursite.com/配置DHCP服务器/index.html">
+<meta property="og:title" content="爬虫日记——APP爬虫入门（1）">
+<meta property="og:url" content="http://yoursite.com/爬虫日记——APP爬虫入门（1）/index.html">
 <meta property="og:site_name" content="Flytutu的博客">
-<meta property="og:description" content="安装dhcp测试环境为Ubuntu15.04系统 安装如下： 1sudo apt-install dhcp3-server">
+<meta property="og:description" content="APP相对于一般的网页来说，APP是一个更加封闭的环境，爬虫想要去爬取数据会更加困难。单由于一个APP后面对应的是一个真正的用户，并且用户对手机更加依赖，更多互联网产品会对APP开放更大的权限，能够看到更加详细的信息，这也让得APP爬虫更加重要。 本系列文章主要描述一下如何对APP进行简单的分析，包括接口分析、APP反编译、Xposed注入。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/image/安装dhcp-1.png">
-<meta property="og:image" content="http://yoursite.com/image/安装dhcp-2.png">
-<meta property="og:image" content="http://yoursite.com/image/安装dhcp-3.png">
-<meta property="og:image" content="http://yoursite.com/image/安装dhcp-4.png">
-<meta property="og:image" content="http://yoursite.com/image/安装dhcp-5.png">
-<meta property="og:image" content="http://yoursite.com/image/安装dhcp-6.png">
-<meta property="og:image" content="http://yoursite.com/image/安装dhcp-7.png">
-<meta property="og:image" content="http://yoursite.com/image/安装dhcp-8.png">
-<meta property="og:updated_time" content="2018-10-10T08:38:35.497Z">
+<meta property="og:image" content="http://yoursite.com/image/爬虫1-1-charles代理.png">
+<meta property="og:image" content="http://yoursite.com/image/爬虫1-2-代理.png">
+<meta property="og:image" content="http://yoursite.com/image/爬虫1-3-手机证书.png">
+<meta property="og:image" content="http://yoursite.com/image/爬虫1-4-浏览器证书.png">
+<meta property="og:image" content="http://yoursite.com/image/爬虫1-5-ssl.png">
+<meta property="og:updated_time" content="2019-06-21T02:57:30.910Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="配置DHCP服务器">
-<meta name="twitter:description" content="安装dhcp测试环境为Ubuntu15.04系统 安装如下： 1sudo apt-install dhcp3-server">
-<meta name="twitter:image" content="http://yoursite.com/image/安装dhcp-1.png">
+<meta name="twitter:title" content="爬虫日记——APP爬虫入门（1）">
+<meta name="twitter:description" content="APP相对于一般的网页来说，APP是一个更加封闭的环境，爬虫想要去爬取数据会更加困难。单由于一个APP后面对应的是一个真正的用户，并且用户对手机更加依赖，更多互联网产品会对APP开放更大的权限，能够看到更加详细的信息，这也让得APP爬虫更加重要。 本系列文章主要描述一下如何对APP进行简单的分析，包括接口分析、APP反编译、Xposed注入。">
+<meta name="twitter:image" content="http://yoursite.com/image/爬虫1-1-charles代理.png">
 
 
 
@@ -149,13 +146,13 @@ var _hmt = _hmt || [];
 
 
 
-  <link rel="canonical" href="http://yoursite.com/配置DHCP服务器/"/>
+  <link rel="canonical" href="http://yoursite.com/爬虫日记——APP爬虫入门（1）/"/>
 
 
 
 
 
-  <title>配置DHCP服务器 | Flytutu的博客</title>
+  <title>爬虫日记——APP爬虫入门（1） | Flytutu的博客</title>
   
 
 
@@ -314,7 +311,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/配置DHCP服务器/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/爬虫日记——APP爬虫入门（1）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="flytutu">
@@ -331,7 +328,7 @@ var _hmt = _hmt || [];
 
         
         
-          <h1 class="post-title" itemprop="name headline">配置DHCP服务器</h1>
+          <h1 class="post-title" itemprop="name headline">爬虫日记——APP爬虫入门（1）</h1>
         
 
         <div class="post-meta">
@@ -343,8 +340,8 @@ var _hmt = _hmt || [];
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-10T15:59:19+08:00">
-                2018-10-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-20T12:27:13+08:00">
+                2019-04-20
               </time>
             
 
@@ -378,41 +375,43 @@ var _hmt = _hmt || [];
       
 
       
-        <h1 id="安装dhcp"><a href="#安装dhcp" class="headerlink" title="安装dhcp"></a>安装dhcp</h1><p>测试环境为Ubuntu15.04系统</p>
-<p>安装如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-install dhcp3-server</span><br></pre></td></tr></table></figure>
+        <p>APP相对于一般的网页来说，APP是一个更加封闭的环境，爬虫想要去爬取数据会更加困难。单由于一个APP后面对应的是一个真正的用户，并且用户对手机更加依赖，更多互联网产品会对APP开放更大的权限，能够看到更加详细的信息，这也让得APP爬虫更加重要。</p>
+<p>本系列文章主要描述一下如何对APP进行简单的分析，包括接口分析、APP反编译、Xposed注入。</p>
 <a id="more"></a>
-<p>在网上会看到出现两个包：dhcp3-server和isc-dhcp-server，实际上这两个包为同一个包，只是配置文件名称发生了差异（/etc/dhcp3 –&gt; /etc/dhcp），<a href="https://askubuntu.com/questions/199683/dhcp3-server-or-isc-dhcp-server" target="_blank" rel="noopener">参考</a></p>
-<p><img src="../image/安装dhcp-1.png" alt=""></p>
-<h1 id="配置dhcp"><a href="#配置dhcp" class="headerlink" title="配置dhcp"></a>配置dhcp</h1><p>安装了dhcp后并不能马上开启服务开始使用，必须要配置才能成功的开启服务。</p>
+<h1 id="抓取工具"><a href="#抓取工具" class="headerlink" title="抓取工具"></a>抓取工具</h1><p>对于网页的接口分析，常使用Chrome的调试工具来进行调试，但是由于APP并不能通过这种方法，我们可以通过工具来进行接口的分析。</p>
+<p>常见的接口爬取有两种方法：</p>
 <ol>
-<li><p>要打开/etc/default/isc-dhcp-server并在里面选择你要使用的网卡: </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/default/isc-dhcp-server</span><br></pre></td></tr></table></figure>
-<p><img src="../image/安装dhcp-2.png" alt=""></p>
-</li>
-<li><p>选择了网卡后就要进行下一项。对你的/etc/dhcp/dhcpd.conf进行修改，我是直接在该文件里面进行添加。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/dhcp/dhcpd.conf</span><br></pre></td></tr></table></figure>
-<p>配置就如下图:</p>
-<p><img src="../image/安装dhcp-3.png" alt=""></p>
-</li>
-<li><p>给你的网卡固定一个ip。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim/etc/network/interfaces</span><br></pre></td></tr></table></figure>
-<p>将你选择的网卡固定一个ip。这一步非常重要，很多人错误就是没有这一步。</p>
-<p><img src="../image/安装dhcp-4.png" alt=""></p>
-</li>
-<li><p>开启服务。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/init.d/isc-dhcp-server restart</span><br></pre></td></tr></table></figure>
-<p><img src="../image/安装dhcp-5.png" alt=""></p>
-<p>在局域网的其他机器配置dhcp服务器为本机，然后查看IP。</p>
-<p><img src="../image/安装dhcp-6.png" alt=""></p>
+<li>监听网卡，例如：tcpdump、wireshark。</li>
+<li>网络代理，例如：fiddler、charles。</li>
+</ol>
+<p>由于wireshark能够分析多种协议，所以使用比较麻烦，我们这里用charles来进行分析。</p>
+<h2 id="1、-设置代理"><a href="#1、-设置代理" class="headerlink" title="1、 设置代理"></a>1、 设置代理</h2><p>正如上面所描述的方法一样，我们需要设置手机代理，让APP的网络请求通过charles。在Charles中设置代理端口，默认的是8888，如何端口冲突可以进行修改。</p>
+<p><img src="../image/爬虫1-1-charles代理.png" alt=""></p>
+<p>在手机网络设置中填写代理设置，选择手动代理，填写代理ip，既为Charles机器的ip，本机ip可以通过help&gt;local ip addresses查看，代理端口为设置的端口8888。配置好后就能够正常查看http网络包了。</p>
+<p><img src="../image/爬虫1-2-代理.png" alt=""></p>
+<h2 id="2、导入Charles证书"><a href="#2、导入Charles证书" class="headerlink" title="2、导入Charles证书"></a>2、导入Charles证书</h2><p>上述方法能够正常抓取http协议包，但是https包虽然能正常爬取，但是报错”You may need to configure your browser or application to trust the Charles Root Certificate. See SSL Proxying in the Help menu.”</p>
+<ol>
+<li><p>手机上导入Charles根证书</p>
+<p><img src="../image/爬虫1-3-手机证书.png" alt=""></p>
+<p>打开help&gt;ssl proxying&gt;install Charles Root Certificate on a moblie devices or remote browser，能看到上图的提示。</p>
+<p>使用系统自带浏览器访问chls.pro/ssl</p>
+<p><img src="../image/爬虫1-4-浏览器证书.png" alt=""></p>
 </li>
 </ol>
-<h1 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h1><p>当开启服务时，出现下面的错误。 </p>
-<p><img src="../image/安装dhcp-7.png" alt=""></p>
-<p>解决方法：查看syslog。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail /var/log/syslog</span><br></pre></td></tr></table></figure>
-<p><img src="../image/安装dhcp-8.png" alt=""></p>
-<p>在选择网卡时出现问题。</p>
+<p>   填写证书名称即可，若手机没有设置密码或PIN码，需要先进行设置，设置成功即可。</p>
+<ol start="2">
+<li><p>电脑端导入Charles根证书</p>
+<p>打开help&gt;ssl proxying&gt;install Charles Root Certificate，将根证书导入到本地电脑。双击证书，点击信任，将此证书始终信任。</p>
+</li>
+<li><p>设置ssl proxying</p>
+<p>打开proxy&gt;ssl proxying settings，允许enable ssl proxying，点击add按钮，host和port都填写*，既代表信任全部。</p>
+<p><img src="../image/爬虫1-5-ssl.png" alt=""></p>
+</li>
+</ol>
+<p>若安卓系统为7.0以上，系统不允许开发人员在不修改应用程序代码的情况下自定义他们的网络安全设置，也就是用户(user)导入的Charles根证书是不被信任的。对于这种情况，要么选择系统版本低于安卓7.0，要么将Charles证书在APP中进行配置。</p>
+<h2 id="3、Android-7-X-以上系统中抓第三方app的https包"><a href="#3、Android-7-X-以上系统中抓第三方app的https包" class="headerlink" title="3、Android 7.X 以上系统中抓第三方app的https包"></a>3、Android 7.X 以上系统中抓第三方app的https包</h2><p>Android7.X以上系统中抓取第三方app的https包有多种方法，但是大多数方法都要修改app的代码，我这里选择了不修改代码的方法。</p>
+<p>通过Xposed的<a href="https://github.com/Fuzion24/JustTrustMe" target="_blank" rel="noopener">JustTrustMe</a>模块来信任所有的证书，但是Xposed模块需要手机root权限。</p>
+<p>现在国内厂商的手机root越来越困难了，能够root的手机越来越少了，通过模拟器来爬取需要app支撑x86框架，而且部分app采用了安全加固产品，反编译也有比较困难的，所以对于不同的app需要不同的方法来解决，如何解决就要靠自己的探索了，以及自己的经验。不断探索，不断研究，终会成功的。</p>
 
       
     </div>
@@ -442,7 +441,7 @@ var _hmt = _hmt || [];
       
         <div class="post-tags">
           
-            <a href="/tags/运维/" rel="tag"># 运维</a>
+            <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
           
         </div>
       
@@ -455,8 +454,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/基于Fatfree和Knockout的前后端分离的开发模式（2）/" rel="next" title="基于Fatfree和Knockout的前后端分离的开发模式(2)">
-                <i class="fa fa-chevron-left"></i> 基于Fatfree和Knockout的前后端分离的开发模式(2)
+              <a href="/基于docker搭建nexus/" rel="next" title="基于docker搭建nexus">
+                <i class="fa fa-chevron-left"></i> 基于docker搭建nexus
               </a>
             
           </div>
@@ -464,10 +463,6 @@ var _hmt = _hmt || [];
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/基于docker搭建nexus/" rel="prev" title="基于docker搭建nexus">
-                基于docker搭建nexus <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -590,7 +585,7 @@ var _hmt = _hmt || [];
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装dhcp"><span class="nav-number">1.</span> <span class="nav-text">安装dhcp</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置dhcp"><span class="nav-number">2.</span> <span class="nav-text">配置dhcp</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误"><span class="nav-number">3.</span> <span class="nav-text">错误</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#抓取工具"><span class="nav-number">1.</span> <span class="nav-text">抓取工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、-设置代理"><span class="nav-number">1.1.</span> <span class="nav-text">1、 设置代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、导入Charles证书"><span class="nav-number">1.2.</span> <span class="nav-text">2、导入Charles证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、Android-7-X-以上系统中抓第三方app的https包"><span class="nav-number">1.3.</span> <span class="nav-text">3、Android 7.X 以上系统中抓第三方app的https包</span></a></li></ol></li></ol></div>
             
 
           </div>
