@@ -114,7 +114,8 @@ var _hmt = _hmt || [];
 <meta property="og:image" content="http://yoursite.com/image/爬虫1-3-手机证书.png">
 <meta property="og:image" content="http://yoursite.com/image/爬虫1-4-浏览器证书.png">
 <meta property="og:image" content="http://yoursite.com/image/爬虫1-5-ssl.png">
-<meta property="og:updated_time" content="2019-06-21T05:25:54.165Z">
+<meta property="og:image" content="http://yoursite.com/image/爬虫1-8.png">
+<meta property="og:updated_time" content="2019-06-22T08:43:47.507Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="爬虫日记——APP爬虫入门（1）">
 <meta name="twitter:description" content="APP相对于一般的网页来说，APP是一个更加封闭的环境，爬虫想要去爬取数据会更加困难。单由于一个APP后面对应的是一个真正的用户，并且用户对手机更加依赖，更多互联网产品会对APP开放更大的权限，能够看到更加详细的信息，这也让得APP爬虫更加重要。 本系列文章主要描述一下如何对APP进行简单的分析，包括接口分析、APP反编译、Xposed注入。">
@@ -412,6 +413,13 @@ var _hmt = _hmt || [];
 <h2 id="3、Android-7-X-以上系统中抓第三方app的https包"><a href="#3、Android-7-X-以上系统中抓第三方app的https包" class="headerlink" title="3、Android 7.X 以上系统中抓第三方app的https包"></a>3、Android 7.X 以上系统中抓第三方app的https包</h2><p>Android7.X以上系统中抓取第三方app的https包有多种方法，但是大多数方法都要修改app的代码，我这里选择了不修改代码的方法。</p>
 <p>通过Xposed的<a href="https://github.com/Fuzion24/JustTrustMe" target="_blank" rel="noopener">JustTrustMe</a>模块来信任所有的证书，但是Xposed模块需要手机root权限。</p>
 <p>现在国内厂商的手机root越来越困难了，能够root的手机越来越少了，通过模拟器来爬取需要app支撑x86框架，而且部分app采用了安全加固产品，反编译也有比较困难的，所以对于不同的app需要不同的方法来解决，如何解决就要靠自己的探索了，以及自己的经验。不断探索，不断研究，终会成功的。</p>
+<h1 id="4、抓取websocket请求"><a href="#4、抓取websocket请求" class="headerlink" title="4、抓取websocket请求"></a>4、抓取websocket请求</h1><p>charles从3.11版本后，开始支持websocket请求，但是不知道什么原因，我们始终不能抓取到websocket请求，很多时间我们会认为可能该APP没有使用websocket请求，但是你可能忽略了很重要的东西。由于我们使用的是wifi代理配置，但是有些协议是不会经过wifi代理的，我们需要使用全局代理app，通过大量文章的查询，我最终选择了drony代理app。</p>
+<ol>
+<li>下载drony</li>
+<li>进入setting选项，选择wifi</li>
+<li>找到使用的网络名，点进设置，如wifi代理一样，填写hostname和port</li>
+</ol>
+<p><img src="../image/爬虫1-8.png" alt=""></p>
 
       
     </div>
@@ -541,7 +549,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -589,7 +597,7 @@ var _hmt = _hmt || [];
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#抓取工具"><span class="nav-number">1.</span> <span class="nav-text">抓取工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、-设置代理"><span class="nav-number">1.1.</span> <span class="nav-text">1、 设置代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、导入Charles证书"><span class="nav-number">1.2.</span> <span class="nav-text">2、导入Charles证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、Android-7-X-以上系统中抓第三方app的https包"><span class="nav-number">1.3.</span> <span class="nav-text">3、Android 7.X 以上系统中抓第三方app的https包</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#抓取工具"><span class="nav-number">1.</span> <span class="nav-text">抓取工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、-设置代理"><span class="nav-number">1.1.</span> <span class="nav-text">1、 设置代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、导入Charles证书"><span class="nav-number">1.2.</span> <span class="nav-text">2、导入Charles证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、Android-7-X-以上系统中抓第三方app的https包"><span class="nav-number">1.3.</span> <span class="nav-text">3、Android 7.X 以上系统中抓第三方app的https包</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、抓取websocket请求"><span class="nav-number">2.</span> <span class="nav-text">4、抓取websocket请求</span></a></li></ol></div>
             
 
           </div>
